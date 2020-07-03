@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading;
 
-namespace PropertyHook
+namespace PropertyHookCustom
 {
     /// <summary>
     /// An interface to another application's memory that automatically handles hooking, unhooking, and pointer management.
@@ -60,6 +60,7 @@ namespace PropertyHook
         private List<PHPointerAOB> AOBPointers;
         private Thread RefreshThread;
         private CancellationTokenSource RefreshCancellationSource;
+        private object CallerObject;
 
         /// <summary>
         /// Creates a new PHook.
@@ -67,11 +68,13 @@ namespace PropertyHook
         /// <param name="refreshInterval">How often the automatic hooking thread should check for new processes, in milliseconds.</param>
         /// <param name="minLifetime">The minimum time a process must have been running before hooking is attempted, in milliseconds.</param>
         /// <param name="processSelector">A function that determines if a process should be attempted to be hooked.</param>
-        public PHook(int refreshInterval, int minLifetime, Func<Process, bool> processSelector)
+        /// <param name="caller">An object to which an OnHooked function belongs.</param>
+        public PHook(object caller, int refreshInterval, int minLifetime, Func<Process, bool> processSelector)
         {
             Selector = processSelector;
             RefreshInterval = refreshInterval;
             MinLifetime = minLifetime;
+            CallerObject = caller;
             AOBPointers = new List<PHPointerAOB>();
             RefreshThread = null;
             RefreshCancellationSource = null;
@@ -315,12 +318,12 @@ namespace PropertyHook
 
         private void RaiseOnHooked()
         {
-            OnHooked?.Invoke(this, new PHEventArgs(this));
+            OnHooked?.Invoke(CallerObject, new PHEventArgs(this));
         }
 
         private void RaiseOnUnhooked()
         {
-            OnUnhooked?.Invoke(this, new PHEventArgs(this));
+            OnUnhooked?.Invoke(CallerObject, new PHEventArgs(this));
         }
     }
 }

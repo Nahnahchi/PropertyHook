@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace PropertyHook
+namespace PropertyHookCustom
 {
     /// <summary>
     /// Provides wrappers for process manipulation via kernel32.dll.

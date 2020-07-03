@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PropertyHook
+namespace PropertyHookCustom
 {
     /// <summary>
     /// Args passed to the hook and unhook events of a PHook.

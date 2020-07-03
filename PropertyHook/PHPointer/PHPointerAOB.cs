@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PropertyHook
+namespace PropertyHookCustom
 {
     /// <summary>
     /// A dynamic pointer starting from an array of bytes scanned for in the target process.
