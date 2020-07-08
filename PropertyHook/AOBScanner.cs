@@ -7,7 +7,7 @@ namespace PropertyHookCustom
 {
     internal class AOBScanner
     {
-        private const uint PAGE_EXECUTE_ANY = Kernel32.PAGE_EXECUTE | Kernel32.PAGE_EXECUTE_READ | Kernel32.PAGE_EXECUTE_READWRITE | Kernel32.PAGE_EXECUTE_WRITECOPY;
+        private const uint PAGE_EXECUTE_ANY = Kernel32.PAGE_EXECUTE | Kernel32.PAGE_EXECUTE_READ | Kernel32.PAGE_EXECUTE_READWRITE | Kernel32.PAGE_EXECUTE_WRITECOPY | Kernel32.PAGE_READWRITE;
 
         private List<Kernel32.MEMORY_BASIC_INFORMATION> MemRegions;
 
